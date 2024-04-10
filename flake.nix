@@ -45,8 +45,21 @@
           ava = pkgs.callPackage ./pkgs/ava.nix {};
           tensor_parallel = pkgs.callPackage ./pkgs/tensor_parallel.nix {};
           text-generation-inference = pkgs.callPackage ./pkgs/text-generation-inference.nix {};
-          comfyui = pkgs.callPackage ./pkgs/comfyui/default.nix {};
-
+          comfyui = pkgs.callPackage ./pkgs/comfyui/default.nix {
+            modelsPath = "/data/lore/AI/ComfyUI/models";
+            inputPath = "/data/lore/AI/ComfyUI/input";
+            outputPath = "/data/lore/AI/ComfyUI/output";
+            tempPath = "/data/lore/AI/ComfyUI/temp";
+            userPath = "/data/lore/AI/ComfyUI/user";
+            customNodes = with comfyui-custom-nodes; [
+              controlnet-aux
+              inpaint-nodes
+              ipadapter-plus
+              tooling-nodes
+              ultimate-sd-upscale
+            ];
+          };
+          comfyui-custom-nodes = pkgs.lib.recurseIntoAttrs (pkgs.callPackage ./pkgs/comfyui/custom-nodes.nix {});
           lycoris-lora = pkgs.callPackage ./pkgs/lycoris-lora.nix {};
           open-clip-torch = pkgs.callPackage ./pkgs/open-clip-torch.nix {};
           dadaptation = pkgs.callPackage ./pkgs/dadaptation.nix {};
