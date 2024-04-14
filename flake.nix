@@ -52,6 +52,7 @@
             tempPath = "/data/lore/AI/ComfyUI/temp";
             userPath = "/data/lore/AI/ComfyUI/user";
             customNodes = with comfyui-custom-nodes; [
+              clipseg
               controlnet-aux
               inpaint-nodes
               ipadapter-plus

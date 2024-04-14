@@ -112,4 +112,25 @@ in
       fetchSubmodules = true;
     };
   };
+
+  clipseg = mkComfyUICustomNodes {
+    pname = "comfyui-clipseg";
+    version = "unstable-2023-04-12";
+    pyproject = true;
+
+    installPhase = ''
+      runHook preInstall
+      mkdir -p $out
+      cp $src/custom_nodes/clipseg.py $out/__init__.py # https://github.com/biegert/ComfyUI-CLIPSeg/issues/12
+      runHook postInstall
+    '';
+
+    src = fetchFromGitHub {
+      owner = "biegert";
+      repo = "ComfyUI-CLIPSeg";
+      rev = "7f38951269888407de45fb934958c30c27704fdb";
+      hash = "sha256-qqrl1u1wOKMRRBvMHD9gE80reDqLWn+vJEiM1yKZeUo=";
+      fetchSubmodules = true;
+    };
+  };
 }
